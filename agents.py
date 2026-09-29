@@ -4,10 +4,17 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from tools import web_search,scrape_url
 from dotenv import load_dotenv
+from langchain_groq import ChatGroq
+import os 
 
 load_dotenv()
 
-model = ChatMistralAI(model = "mistral-small-2603")
+# model = ChatMistralAI(model = "mistral-small-2603")
+model = ChatGroq(
+    model="openai/gpt-oss-20b",
+    groq_api_key=os.getenv("GROQ_API_KEY"),
+    temperature=0
+)
 
 # 1st agent
 def build_search_agent():
